@@ -1,11 +1,12 @@
 FROM node:18-alpine
 
-RUN apk add --no-cache python3 make g++
+RUN apk add --no-cache python3 make g++ bash && \
+    ln -sf /usr/bin/python3 /usr/bin/python
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm config set python python3 && npm install --production
+RUN npm install --production
 
 COPY . .
 
